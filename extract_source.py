@@ -9,8 +9,8 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # read credentials
 config2 = configparser.ConfigParser()
-config2.read(r'/content/looker.ini')
-GITHUB = str(config2['Looker']['github_api'])
+config2.read(r'path to ini file')
+GITHUB = str(config2['ini file profile to initialize']['access token'])
 
 headers2 = {'Authorization': "token " + GITHUB}
 
@@ -43,7 +43,7 @@ def getDTS(dir_url):
 
 ### Use base contents url to extract all paths in repo
 
-repo_url2 = "https://api.github.com/repos/LukaFontanilla/luka_thesis/contents/"
+repo_url2 = "base repo url ending in /contents/"
 file = requests.get(repo_url2, headers=headers2, verify=False)
 json3 = file.json()
 
@@ -64,7 +64,7 @@ view=[]
 dt_sql=[]
 
 for path in paths:
-  dir_url = "https://api.github.com/repos/LukaFontanilla/luka_thesis/contents/" + path
+  dir_url = "base url from earlier" + path
   file = requests.get(dir_url, headers=headers2, verify=False)
   file_json = file.json()
   
